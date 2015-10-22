@@ -126,12 +126,47 @@ public:
         
     }
     
+    static bool IsZero(BigInt* n) {
+        return n->num == "0";
+    }
+    
+    static BigInt* multiply(BigInt* n1, BigInt* n2) {
+        if(IsZero(n1) || IsZero(n2)) return new BigInt();
+        string str1 = n1->num;
+        string str2 = n2->num;
+        int len = str1.length()+str2.length();
+        vector<int> prod(len, 0);
+        for(int i = str1.length()-1; i >= 0; i--) {
+            for(int j = str2.length()-1; j >= 0; j--) {
+                int k  = i+j+1;
+                prod[k] += (str1[i]-'0') * (str2[j] -'0');
+            }
+        }
+        
+        for(int i = len-1; i > 0; i--) {
+            if(prod[i] >= 100) {
+                prod[i-2] += prod[i] / 10;
+                prod[i] %= 100;
+            }
+            if(prod[i] >= 10) {
+                prod[i-1] += prod[i] / 10;
+                prod[i] %= 10;
+            }
+        }
+        string str;
+        for(int i=0; i < len; i++) str += '0'+prod[i];
+        BigInt* res = new BigInt(str);
+        if(n1->neg != n2->neg) return negate(res);
+        return res;
+    }
+    
 };
 
 int main() {
-    BigInt *num1 = new BigInt("-1000");
-    BigInt *num2 = new BigInt("-1");
+    BigInt *num1 = new BigInt("-123000");
+    BigInt *num2 = new BigInt("-234");
     //cout <<BigInt::add(num1,num2)->getNum()<<endl;
-    cout <<BigInt::minus(num1,num2)->getNum()<<endl;
+    //cout <<BigInt::minus(num1,num2)->getNum()<<endl;
+    cout <<BigInt::multiply(num1,num2)->getNum()<<endl;
     return 0;
 }
