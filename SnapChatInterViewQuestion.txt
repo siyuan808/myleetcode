@@ -164,3 +164,7 @@ pigeon hole principle
 继续followup；如果说不让你交换数字，即不能排序怎么办？可以用空间
 继续followup：如果说没有空间怎么办？
 
+---
+2Sum，3Sum，4Sum
+当访问量大的时候，怎么handle request，我说线程池
+
