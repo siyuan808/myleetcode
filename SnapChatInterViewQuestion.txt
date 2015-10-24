@@ -1,0 +1,166 @@
+第一轮 印度哥哥 先在白板上写了关于linkedlist的题目，把linkedlist拆成两个，odd一列，even一列。
+                         在电脑上写的employee的class （class里有一个directreport的list， string name， name是相当于id，独一无二），然后实现method， input是employee ceo， string emp1, string emp2， 找到emp1和emp2共同的manager。. 1point3acres.com/bbs
+
+第二轮 美国哥哥 bloomfilter， 支持add， mightcontains，resize，remove
+第三轮 两个国人哥哥， 给一个double array， 让输出能使用＊，＋， 以及（）得到的maximum。 follow up，如果有<0的怎么处理
+第四轮 abc director， 先问了问background，然后出了magzine里找massage的题目，之后又问了design的题目，类似于google doc，如何保证大家拿到的 信息是一致的，在同一个version.
+
+
+----
+
+/*
+Consider a grid where all the points are represented by integers.
+
+..........................................1point3acres缃�
+...(-2,2)  (-1,2)  (0,2)  (1,2)  (2,2)...
+...(-2,1)  (-1,1)  (0,1)  (1,1)  (2,1)...
+...(-2,0)  (-1,0)  (0,0)  (1,0)  (2,0)...
+...(-2,-1) (-1,-1) (0,-1) (1,-1) (2,-1)...
+...(-2,-2) (-1,-2) (0,-2) (1,-2) (2,-2).... more info on 1point3acres.com
+..........................................
+
+k-Snap point: A point whose digits sum up to less than or equal to k. In this
+question, we ignore all the signs in the number.  For exxample, (1, 0) is a 1-snap point, (0, 10) is a 1-snap point, and (-100, 0) is also a 1-snap point; however (11, 0) is not a 1-snap point.
+
+Question 1: Implement the following function
+boolean isSnapPoint(Point p, int k)
+
+Returns true if p is a k-snap point, and false otherwise.
+Reachable k-snap point: A k-snap point is a reachable k-snap point if there is a path from (0,0) to that point, where the path only consists of k-snap points.
+Question 2: Given k, return all the reachable k-snap points.
+*/
+
+---
+电面：1. search in rotated array 2. min stack
+onsite: . 鍥磋鎴戜滑@1point 3 acres
+1. 有一个外国字典，里面的字母都不认识，随机抽出足够的单词，让你重构字母的顺序。拓扑排序解. more info on 1point3acres.com
+2. 有一个task stream with value，实现一个class with member function 可以求出过去10s 的平均值，最大值，最小值。每个task生成按时间顺序。注意window是时间10s，不是task个数。 queue/deque解
+3. 任意没有排序的数组，求第三小的数，求中值，求第k大的数
+4. 安装程序 with dependecies，求出任一正确的安装顺序，follow up 求出安装顺序但是需要dependecies少的程序先安装
+
+----
+国人小哥面的，问了两道coding，看别人的面经是一样的题目，估计都是他面的。他家code都要现场compile，然后run一些test case。
+1. zigzag print一个matrix，input: [ [1, 2, 3], [4, 5, 6] ] output: [ [1], [2, 3], [3, 5], [6] ]
+解法：hard coding
+
+2. 给两个string s跟p，问如何判断p是不是s的某个substring的permutation，例如s = "dlwercxhhcd", p = "hdch"，返回true
+解法：sliding window + hash map，其实跟leetcode上面几道题都一样的方法，注意下corner case就好了。
+
+-----
+snapchat 10月onsite面经
+
+1 word ladder 1 和 返回一条路经. 1point 3acres 璁哄潧
+2 xml parser
+3 dulplicated nums 返回是否有重复数字 follow up 是否有重复数字相距小于k 和 如何解决网页打开慢
+4 steam nums 返回 median. 1point3acres.com/bbs
+
+注：我看到清单要求是 小于一年工作经验的 只考code和 简历 。 但是不排除某些面试官天马行空 
+
+----
+Sudoku Verifier 用一个长度81的字符串表示数独棋盘 每个元素都是1-9的数字
+---
+
+---
+上来说implement big number library
+
+---
+
+Snapchat 电面
+1.two sum  输出第一组符合要求的数
+2. work break  输出一组即可
+
+---
+2.判断一个图是不是
+   bipartite: https://en.wikipedia.org/wiki/Bipartite_graph
+   
+---
+自己写一个treemap class 不要求删除
+
+---
+// Give a stream of numbers
+// Write a method to return the medium of the numbers you have received
+
+// void add(int num);
+// int getMedium();
+
+---
+1. bloomfilter, follow up  如何support remove element from bloomfilter, 当insert element很多以后, 如何扩充容量.
+2. task schedule, leetcode
+午饭 随便聊聊
+3. directed graph detect cycle
+4. OOD, design 一个server, 使得最多只可以有3个线程在工作, 其余的request 可以存到一个buffer queue里, follow up : 如果queue里的request可以有priority, 如何support change priority in the queue.
+
+---
+先是建一个event, 里面有start time和end time, 然后check这两个event有没有conflict, 各种if else, 然后升级, 给一个list of events, 直接sort他们。再升级, 建一个schedule, 给几个office, 问怎么样的solution才是optimal
+一个array的range是1-N，这个array里有1+N个数, 找出这个array里的duplicate。(ex. [1, 1, 3, 5])   HashMap 解决
+
+---
+determine whether there is a substring of A is anagram of B ,follow up: O(n)
+
+---
+给一个二维数组，对角线打印
+
+---
+symmetric binary tree,要用iterate解法
+2. Majority number. more info on 1point3acres.com
+3. Word break，只需要返回第一个符合条件的
+4. 写一个xml parser。大概挂在这上了
+
+---
+trapping rain water。leetcode原题 秒之。小哥一看还有半个小时，说：给你一个难的，但你做不做出来都没关系，会进下一轮。
+2 应该就是大家所说的滑雪（longest ascending path in matrix from(0,0) to (x,y)），但我直接用DFS写的，一次过，小哥说没问题，然后还剩10分钟问问题。
+
+----
+1. word ladder 1, return one shortest path
+2. combination sum, merge K sorted list
+3. print company organization: given a file in which every line has a name, id, and boss id. print this graph. Design a web crawler
+4. longest increasing subsequence
+
+---
+
+感谢地里的面经，借朋友账号发帖回馈
+1. 歪果仁男 ：Behavior questions + Resume 细节 + N-Queens I, follow up: N-Queens II
+2. 国男：Resume 细节 + Cycle Detection (DFS),  follow up: how about BFS?
+3. 国女：Trie 结果写的太快 又加了一道 DP的经典题目Company party
+4. 国男：Resume 细节， 特别特别细节。。。+ Given a String digits (0 - 9), adding + - * () to get the max result. 注意这里和其他面经里面 given int[]，里面有 正，负，0，adding + * () 不一样。这里输入是一个字符串digits，保证是 0 － 9 之间的。 鏉ユ簮涓€浜�.涓夊垎鍦拌鍧�. 
+回过头来想想，此题被改的略坑爹：首先插入 “－” 的情况不需要考虑，因为digits都不带符号，只考虑 ＋ 和 ＊就好； 其次允许几个digits连在一起构成数字，而不是每个数字之间必须插入 ＋ － ＊，比如输入 “11”，结果不是1+1 ＝ 2 而是 11。 貌似无论怎么输入都是连在一起构成的数字为最大结果。
+
+---
+题目：实现 map<K, V> 的三个方法：insert,  search 和 size。 其中K 和 V 应该是模板的参数，要求支持任何类型。
+要求： 要求要用binary search tree 做。 面的时候问了下为啥不用hashtable，问了下，binary search tree 和hash比有啥好处。
+
+---
+iven a list of integers: {4, 3, 1}; // assume no duplicates 鏉ユ簮涓€浜�.涓夊垎鍦拌鍧�. 
+and a target sum: 5
+print out all sequences of integers from the list that sum to target-google 1point3acres
+[4, 1]
+[3, 1, 1]
+[1, 4]
+[1, 3, 1]
+[1, 1, 3]
+[1, 1, 1, 1, 1]
+
+---
+给一个文件，中间有若干A，B string，找最小距离（任意AB之间）
+
+----
+已跪， 发面经造福大家。. 鐗涗汉浜戦泦,涓€浜╀笁鍒嗗湴
+第一轮， n叉树判断是否有回路，dfs, 但是不希望一直维护一个祖先节点的哈希表，所以可以设计一个类，里面存一个布尔型的变量，访问过的设为true，回溯之后设为false
+第二轮， rotate过的数组排序，nlogn找出最小值，o(n)时间构造新的数组
+第三轮， 高精度加法，follow up可以是负数，多加一个高精度减法
+第四轮， 一堆数，中间插入*，+或者括号，求最大值，dp就可以， 但是如果数字全部是正整数的话，只用通过判断1的个数是奇数还是偶数来求最大值，0(n)就可以了
+               merge n个排序过的数组，优先队列或者divide and merge都可以
+               简单的regax判断是否match
+---               
+1, 数组里一个数的出现次数超过数组长度的50%， 找到这个数。
+2，实现一个trie
+3，8*8 棋盘。输入起始点，终止点，和整数k，问从起始点到终止点走k步，有多少
+种走法。
+
+4，给你一个数组，range［1，n］inclusive，然后说如果有个n＋1的数组的话这里面有没
+有重复？为什么？
+pigeon hole principle
+然后followup：怎么找到那个重复的数字？有可能有多个重复
+继续followup；如果说不让你交换数字，即不能排序怎么办？可以用空间
+继续followup：如果说没有空间怎么办？
+
