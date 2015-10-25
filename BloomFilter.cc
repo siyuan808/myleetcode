@@ -29,7 +29,7 @@ public:
           }
       }
       //expand it if exceeds threshold
-      if(_count > _len * _thresh) {
+      if(_count >= _thresh) {
           resize();
       }
   }
@@ -49,14 +49,14 @@ public:
       return true;
   }
   
-  bool mightContains(string& str) {
+  bool mightContains(string str) {
         for(vector<int>& oneBits : _bits) {
             if(contains(oneBits, str)) return true;
         }
         return false;
   }
   
-  void remove(string& str) {
+  void remove(string str) {
         for(vector<int>& oneBits : _bits) {
             if(contains(oneBits, str)) {
                 for(auto hashFun : _hashFuns) {
@@ -67,8 +67,30 @@ public:
         }  
   }
   
+  void printData() {
+      for(vector<int>& oneBits : _bits) {
+          for(int bit : oneBits) {
+              cout <<bit <<" ";
+          }
+          cout <<endl;
+      }
+  }
 };
 
+int hash1(string s) { 
+    return s.length();
+}   
+
 int main() {
-	
+    vector<int (*)(string)> hashs;
+    hashs.push_back(hash1);
+    BloomFilter bf(5,.8,hashs);
+    vector<string> v{"h","he","hel","hell","hell0","hell1"};
+    for(string s: v) bf.add(s);
+    bf.printData();
+    bf.remove("hello");
+    bf.printData();
+    bf.remove("hello");
+    bf.printData();
+    cout <<"Contain: " <<bf.mightContains("hell2");
 }
