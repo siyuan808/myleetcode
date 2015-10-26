@@ -10,10 +10,9 @@ struct Point {
     int x;
     int y;
     Point(int xx, int yy): x(xx), y(yy) {}
-    bool operator==(const Point &other) const
-      { return (x == other.x
-                && y == other.y);
-      }
+    bool operator==(const Point &other) const{
+        return (x == other.x && y == other.y);
+    }
 };
 struct Hash {
     size_t operator()(const Point& k) const {
@@ -40,7 +39,7 @@ bool isSnapPoint(Point p, int k) {
 //from (0,0) to that point, where the path only consists of k-snap
 //point.
 //Given k, return all the reachable k-snap points
-vector<Point> rechableKSnapPoint(int k) {
+vector<Point> rechableKSnapPointBFS(int k) {
     vector<Point> res;
     if(k < 0) return res;
     Point src(0,0);
@@ -65,10 +64,33 @@ vector<Point> rechableKSnapPoint(int k) {
     }
     return res;
 }
+
+void dfs(Point& cnt, int k, unordered_set<Point,Hash>& visited, vector<Point>& res) {
+    if(visited.find(cnt) == visited.end()) {
+        visited.insert(cnt);
+        if(!isSnapPoint(cnt, k)) return;
+        res.push_back(cnt);
+        int next[4][2] = {{-1,0},{1,0},{0,-1},{0,1}};
+        for(int ind = 0; ind < 4; ind++) {
+            Point nx(cnt.x+next[ind][0],cnt.y+next[ind][1]);
+            dfs(nx, k, visited, res);
+        }
+    }
+}
+
+vector<Point> rechableKSnapPointDFS(int k) {
+    vector<Point> res;
+    unordered_set<Point,Hash> visited;
+    Point src(0,0);
+    dfs(src, k, visited, res);
+    return res;
+}
+
+
 int main() {
 	//cout <<sumOfDigits(-19191);
 	//cout <<isSnapPoint(Point(10,31), 4);
-	vector<Point> ksnaps =  rechableKSnapPoint(2);
+	vector<Point> ksnaps =  rechableKSnapPointBFS(2);
 	for(Point p : ksnaps) {
 	    cout <<p.x <<" "<<p.y <<endl;
 	}
