@@ -23,10 +23,11 @@ public:
     }
     void print(int level) {
         cout <<string(level,' ') <<_name<<endl;
-        if(!_content.empty()) cout <<string(level,' ') <<_content<<endl;
+        if(_content != "") cout <<string(level+1,' ') <<_content<<endl;
         for(XMLNode* child : _children) {
             child->print(level+1);
         }
+        cout <<string(level,' ') <<_name<<endl;
     }
 };
 
@@ -37,26 +38,29 @@ struct XMLElement {
 };
 
 struct Token{
-    string xml[5][2] = {{"open", "header"},{"open","tag1"},{"inner","hello"},{"close","tag1"},{"close","header"}};
+    string xml[11][2] = {{"open", "header"},{"open","tag1"},{"inner","hello"},{"close","tag1"},
+                        {"open","tag2"},{"inner","world"},{"open","tag3"},{"inner","nice"},{"close","tag3"},
+                        {"close","tag2"},{"close","header"}};
     int ind = 0;
     XMLElement next() {
-        //cout <<xml[ind][0]<<xml[ind][1]<<endl;
-        return XMLElement(xml[ind][0],xml[ind++][1]);
+        //cout <<xml[ind][0]<<" "<<xml[ind][1]<<endl;
+        XMLElement res(xml[ind][0],xml[ind][1]);
+        ind++;
+        return res;
     }
 } token;
 
 void build(XMLNode* parent) {
     XMLElement el = token.next();
-    if(el.type == "close") return;
-    else if(el.type == "inner") {
+    if(el.type == "inner") {
         parent->addContent(el.content);
-        build(parent);
-    } else {
+    } else if(el.type=="open") {
         //open
         XMLNode* node = new XMLNode(el.content);
         build(node);
         parent->addChild(node);
-    }
+    } else return;
+    build(parent); //Continue build the parent, to close it.
 }
 
 XMLNode* build() {
