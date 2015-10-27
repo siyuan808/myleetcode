@@ -7,7 +7,7 @@
 using namespace std;
 
 class PeakQueue {
-    deque<pair<int,int>> _data;
+    deque<pair<int,int>> _data; //first: val, second: time stamp
     deque<int> _minData, _maxData;
 public:
     void enqueue(int val, int t) {
@@ -16,13 +16,16 @@ public:
         //maintain _maxData
         while(!_maxData.empty()) {
             if(_maxData.back() < val) _maxData.pop_back();
+            else break;
         }
         _maxData.push_back(val);
         
         //maintain _minData
         while(!_minData.empty()) {
             if(_minData.back() > val) _minData.pop_back();
+            else break;
         }
+        _minData.push_back(val);
     }
     
     void dequeue() {
@@ -96,6 +99,8 @@ public:
 
 
 int main() {
-	cout <<time(NULL)<<endl;
-	cout <<time(NULL)<<endl;
+	PeakQueue pq;
+	pq.enqueue(1,1);pq.enqueue(3,1);pq.enqueue(1,1);pq.enqueue(2,1);
+	pq.dequeue();pq.dequeue();pq.dequeue();
+	cout <<"Max: " <<pq.getMax()<<" min: "<<pq.getMin();
 }
