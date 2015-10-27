@@ -47,7 +47,7 @@ public:
     int getMin() {
         return _minData.front();
     }
-}
+};
 
 class TimeNumber {
     PeakQueue _pq;
@@ -62,7 +62,7 @@ public:
     
     void add(int val, int t) {
         _pq.enqueue(val, t);
-        sum += val;
+        _sum += val;
         _cnt++;
     }
     
@@ -72,8 +72,8 @@ public:
             pair<int,int> data = _pq.front();
             if(data.second < cntTime-_interval) {
                 _pq.dequeue();
-                sum-= data.first;
-                cnt--;
+                _sum-= data.first;
+                _cnt--;
             }
         }
     }
@@ -92,11 +92,10 @@ public:
         cleanUp(cntTime);
         return _pq.getMin();
     }
-}
+};
 
 
 int main() {
 	cout <<time(NULL)<<endl;
-	sleep(10)<<endl;
 	cout <<time(NULL)<<endl;
 }
