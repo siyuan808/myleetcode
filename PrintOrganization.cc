@@ -7,12 +7,14 @@
 
 using namespace std;
 
-vector<string> file = { "Alice,,5",
-"Bob,Alice,3",
-"Carol,Bob,2",
-"David,Bob,3",
-"Eve,Alice,2",
-"Ferris,Eve,1"};
+vector<string> file = {
+    "Bob,Alice,3",
+    "Carol,Bob,2",
+    "David,Bob,3",
+    "Eve,Alice,2",
+    "Ferris,Eve,1",
+    "Alice,,5"
+};
 
 class Organization {
     struct Employee {
@@ -20,9 +22,12 @@ class Organization {
         string name;
         int itemSold;
         int itemSoldSum;
+        void addSub(Employee* sub) {
+            subs.push_back(sub);
+        }
         Employee(string n): name(n) {itemSoldSum = itemSold = 0;};
     };
-    Employee* ceo;
+    Employee* ceo = NULL;
 public:
     int calculateSoldSum(Employee* em) {
         em->itemSoldSum = em->itemSold;
@@ -45,16 +50,21 @@ public:
             string bossName = info.substr(start, end-start);
             int itemSold = stoi(info.substr(end+1));
             
+            
             //build
+            Employee* sub;
             if(nameMap.find(subName) == nameMap.end()) 
                 nameMap[subName] = new Employee(subName);
-            nameMap[subName]->itemSold = itemSold;
+            sub = nameMap[subName];
+            sub->itemSold = itemSold;
             if(bossName == "") {
-                this->ceo = nameMap[subName];
+                this->ceo = sub;
             } else {
+                Employee* boss;
                 if(nameMap.find(bossName) == nameMap.end())
                     nameMap[bossName] = new Employee(bossName);
-                nameMap[bossName]->subs.push_back(nameMap[subName]);
+                boss = nameMap[bossName];
+                boss->addSub(sub);
             }
         }
         if(this->ceo) {
@@ -67,6 +77,7 @@ public:
     }
     
     void printEmployee(Employee* em, int level) {
+        if(em == NULL) return;
         cout <<string(level,' ') << em->name <<" " <<em->itemSoldSum<<endl;
         for(Employee* sub: em->subs) {
             printEmployee(sub, level+2);
