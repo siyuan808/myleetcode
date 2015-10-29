@@ -180,6 +180,11 @@ onsite要带电脑 跑code。讨论简历的时候，可以给面试官用电脑
 8 给一个二次函数y=ax^2+b，求这个函数与x y轴截出的图形的面积。这轮是写完一个题后，面试官说还有时间，问个他自个儿想的新题，积分早就忘光了，只是讨论了下的思路，估计挂在这里或是那个求sum的题了. 
 
 ---
+1，binary tree to doubly linked list
+2,  two sum (first two number that sum to a target)
+   follow up : three sum (first three number)
+   
+---
 一个中年白人manager。一上来先问了问why snapchat, what's your favoriate parts of internshop in Facebook。之后做题，给定一些输入如
 Employee,Manager,ItemsSold
 Alice,,5
