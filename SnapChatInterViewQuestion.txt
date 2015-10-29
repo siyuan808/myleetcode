@@ -168,3 +168,35 @@ pigeon hole principle
 2Sum，3Sum，4Sum
 当访问量大的时候，怎么handle request，我说线程池
 
+---
+onsite要带电脑 跑code。讨论简历的时候，可以给面试官用电脑show下自己的project
+1 given [1, [2,3], [[4]]], return sum. 计算sum的方法是每向下一个level权重+1， 例子的sum = 1 * 1 + (2 + 3) * 2 + 4 * 3。follow up：每向下一个level 权重 - 1， sum = 3 * 1 +（2 + 3）* 2 + 4 * 1 
+2 majority number
+3 clone graph
+4 设计一个数据结构 能支持 insert(int val), getRandom(), delete(int val) 均在 O(1) time完成
+5 给一个字符串，问最少删去多少个字符可以得到一个是回文的字符串, 只能删去头尾处的字符 eg "abxyyxc" -> 3
+6 给一个整数n，输出俩数x和y，使得x*y的值在 [n, n+2] 的范围内，同时保证 |x - y| 最小， e.g. n=25, return x=y=5 或  n=22， return x=4 y=6
+7 given an int n, write a function to generate false in a probability of 1/(2^n), e.g. n = 3, 那么函数以1/8的概率返回false， 以7/8的概率返回true
+8 给一个二次函数y=ax^2+b，求这个函数与x y轴截出的图形的面积。这轮是写完一个题后，面试官说还有时间，问个他自个儿想的新题，积分早就忘光了，只是讨论了下的思路，估计挂在这里或是那个求sum的题了. 
+
+---
+一个中年白人manager。一上来先问了问why snapchat, what's your favoriate parts of internshop in Facebook。之后做题，给定一些输入如
+Employee,Manager,ItemsSold
+Alice,,5
+Bob,Alice,3
+Carol,Bob,2. 1point3acres.com/bbs
+David,Bob,3
+Eve,Alice,2
+Ferris,Eve,1
+要求打印出这个样子
+Alice 16
+    Bob 8
+        Carol 2. 涓€浜�-涓夊垎-鍦帮紝鐙鍙戝竷
+        David 3
+    Eve 3
+        Ferris 1
+        
+
+一个年轻白人。一上来先介绍了一下Snapchat各个team什么的，然后问了问project。然后问说我们有个很huge的social network，你需要design一个system，这个system可以用来evaluate各种我们设计的朋友推荐算法，你要怎么设计。说了一下大概的设计，面试官更看重我如何准备data来做evalution，于是就也说了说这个部分。之后做题，就是根据计算机网络里面那个CIDR然后来做IP address filtering。比如给定一些rule: "7.0.0.0/8", 那么所有前8位是7的address应该全部被filter掉。楼主用hashset来存rule然后用一些位运算的方法来做filter。写完代码改了一个小bug之后测试通过。
+
+一上来也是问了问project。然后做题，给定一个grid matrix，就是类似围棋盘那种东西。然后某些grid（放棋子的地方）上面有点，给定一个query点的位置，返回k nearest点on this grid matrix。
