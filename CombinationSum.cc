@@ -5,6 +5,7 @@
 #include <limits.h>
 
 using namespace std;
+//A number can be used anytimes, and the result doesn't have to be sorted.
 
 void dfs(vector<int>& nums, int target, vector<int>& sol, vector<vector<int>>& res) {
     if(target == 0) {
