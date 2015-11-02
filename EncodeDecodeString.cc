@@ -10,20 +10,9 @@
 using namespace std;
 
 class StringCode {
+    string codeBook;
 public:
     string encode(string& str) {
-         /* Example
-         * "bJbb++b"
-         *    1. 'b' occurs 4 times.
-         *       '+' occurs 2 times.
-         *       'J' occurs 1 times.
-         *    2. Thus, the following encodings are assigned:
-         *       'b' -> "1"
-         *       '+' -> "01"
-         *       'J' -> "001"
-         *    3. By concatenating the encodings together, we get:
-         *       "10011101011".
-         */
         if(str == "") return "";
         unordered_map<char, int> countMap;
         for(char c : str) {
@@ -43,9 +32,11 @@ public:
         unordered_map<char, string> codeMap;
         string code="1";
         codeMap[occChar.back().second] = code;
+        codeBook += occChar.back().second;
         for(int i = occChar.size()-2; i>= 0; i--) {
             code = "0" + code;
             codeMap[occChar[i].second] = code;
+            codeBook += occChar[i].second;
         }
         
         string res;
@@ -55,13 +46,22 @@ public:
         return res;
     }
     
-    string decode(string& str) {
-        return "";
+    string decode(string str) {
+        string res = "";
+        int pos = 0;
+        for(char c : str) {
+            if(c == '1') {
+                if(pos > codeBook.size()) return "";
+                res += codeBook[pos];
+                pos = 0;
+            } else pos ++;
+        }
+        return res;
     }
 };
 
 int main() {
     StringCode sc;
-    string str = "bjbb++b";
-    cout <<sc.encode(str);
+    string str = "bjbb++b++";
+    cout <<sc.decode(sc.encode(str));
 }
