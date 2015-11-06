@@ -13,7 +13,7 @@ bool dfs(vector<int>& nums, int cur, string expr, vector<bool>& visited) {
         if(visited[i] == false) {
             allVisited = false;
             visited[i] = true;
-            if(cur < 0){
+            if(expr == ""){
                 if(dfs(nums, nums[i], ""+to_string(nums[i]), visited)) return true;
             }
             else {
@@ -33,7 +33,7 @@ bool dfs(vector<int>& nums, int cur, string expr, vector<bool>& visited) {
 }
 
 bool gameOf24(vector<int>& nums) {
-    int cur = -1;
+    int cur = 0;
     string expr = "";
     vector<bool> visited(nums.size(), false);
     return dfs(nums,cur, expr, visited);
@@ -42,7 +42,7 @@ bool gameOf24(vector<int>& nums) {
 int main()
 {
     vector<int> nums;
-    for(int i = 1;  i <= 7;i++) nums.push_back(i);
+    for(int i = 1;  i <= 24;i++) nums.push_back(i);
     cout <<gameOf24(nums);
     return 0;
 }
