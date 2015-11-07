@@ -3,6 +3,7 @@
 #include <deque>
 #include <unordered_set>
 #include <unordered_map>
+#include <sstream>
 #include <limits.h>
 
 using namespace std;
@@ -41,19 +42,25 @@ public:
         unordered_map<string, Employee*> nameMap;
         for(int ind = 0; ind < file.size(); ind++) {
             string info = file[ind];
-            int start = 0;
-            int end = 0;
-            while(info[end] != ',') end++;
-            string subName = info.substr(start, end-start);
-            start = end = end+1;
-            while(info[end] != ',') end++;
-            string bossName = info.substr(start, end-start);
-            int itemSold = stoi(info.substr(end+1));
+//            int start = 0;
+//            int end = 0;
+//            while(info[end] != ',') end++;
+//            string subName = info.substr(start, end-start);
+//            start = end = end+1;
+//            while(info[end] != ',') end++;
+//            string bossName = info.substr(start, end-start);
+//            int itemSold = stoi(info.substr(end+1));
+            stringstream ss(info);
+            string subName,bossName,itemStr;
+            getline(ss,subName,',');
+            getline(ss,bossName,',');
+            getline(ss, itemStr, ',');
+            int itemSold = stoi(itemStr);
             
             
             //build
             Employee* sub;
-            if(nameMap.find(subName) == nameMap.end()) 
+            if(nameMap.find(subName) == nameMap.end())
                 nameMap[subName] = new Employee(subName);
             sub = nameMap[subName];
             sub->itemSold = itemSold;
@@ -78,7 +85,7 @@ public:
     
     void printEmployee(Employee* em, int level) {
         if(em == NULL) return;
-        cout <<string(level,' ') << em->name <<" " <<em->itemSoldSum<<endl;
+        cout <<string(level,' ') << em->name <<" "<<em->itemSoldSum<<endl;
         for(Employee* sub: em->subs) {
             printEmployee(sub, level+2);
         }
