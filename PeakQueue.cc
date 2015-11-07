@@ -9,9 +9,11 @@ using namespace std;
 class PeakQueue {
     deque<pair<int,int>> _data; //first: val, second: time stamp
     deque<int> _minData, _maxData;
+    int _sum = 0;
 public:
     void enqueue(int val, int t) {
         _data.push_back(make_pair(val, t));
+        _sum += val;
         
         //maintain _maxData
         while(!_maxData.empty()) {
@@ -31,6 +33,7 @@ public:
     void dequeue() {
         int frontVal = front().first;
         _data.pop_front();
+        _sum -= frontVal;
         if(frontVal == _maxData.front()) _maxData.pop_front();
         if(frontVal == _minData.front()) _minData.pop_front();
     }
@@ -44,29 +47,35 @@ public:
     }
     
     int getMax(){
+        if (empty()) {
+            return INT_MIN;
+        }
         return _maxData.front();
     }
     
     int getMin() {
+        if (empty()) {
+            return INT_MAX;
+        }
         return _minData.front();
+    }
+    
+    double getAverage() {
+        if (empty()) return 0;
+        return (double)_sum / _data.size();
     }
 };
 
 class TimeNumber {
     PeakQueue _pq;
-    int _sum;
-    int _cnt;
     int _interval;
 public:
     TimeNumber(int interval) {
-        _sum = _cnt = 0;
         _interval = interval;
     }
     
     void add(int val, int t) {
         _pq.enqueue(val, t);
-        _sum += val;
-        _cnt++;
     }
     
     void cleanUp(int cntTime) {
@@ -75,16 +84,13 @@ public:
             pair<int,int> data = _pq.front();
             if(data.second < cntTime-_interval) {
                 _pq.dequeue();
-                _sum-= data.first;
-                _cnt--;
-            }
+            } else break;
         }
     }
     
     double getAverage(int cntTime) {
         cleanUp(cntTime);
-        if(_cnt == 0) return 0;
-        return (double) _sum / _cnt; 
+        return _pq.getAverage();
     }
     
     int getMax(int cntTime) {
@@ -99,8 +105,13 @@ public:
 
 
 int main() {
-	PeakQueue pq;
-	pq.enqueue(1,1);pq.enqueue(3,1);pq.enqueue(1,1);pq.enqueue(2,1);
-	pq.dequeue();pq.dequeue();pq.dequeue();
-	cout <<"Max: " <<pq.getMax()<<" min: "<<pq.getMin();
+    TimeNumber tn(10);
+    tn.add(3, 1);
+    tn.add(4, 2);
+    tn.add(5, 5);
+    
+    int t = 12;
+    
+    cout <<"Max: " <<tn.getMax(t)<<" min: "<<tn.getMin(t) <<" Avg: " <<tn.getAverage(t)<<endl;
+    return 0;
 }
